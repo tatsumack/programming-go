@@ -8,11 +8,16 @@ import (
 	"strings"
 )
 
+// 引数のurlにhttp://がなければ追加する
+
 func main() {
 	for _, url := range os.Args[1:] {
+
+		// strings.HasPrefixを使って、prefixがhttp://か判定する
 		if !strings.HasPrefix(url, "http://") {
 			url = "http://" + url
 		}
+
 		resp, err := http.Get(url)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "fetch: %v\n", err)
